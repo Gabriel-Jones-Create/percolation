@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+
 /******************************************************************************
  *  Name:    Kevin Wayne
  *  Login:   wayne
@@ -15,25 +17,35 @@
  ******************************************************************************/
 public class Percolation {
   
-   
+   private boolean[][] grid; // true is open false is closed
+   private int openSites;
+   private WeightedQuickUnionUF percolation;
+	
    public Percolation(int n)  {
    // TODO: create n-by-n grid, with all sites blocked
+	   percolation = new WeightedQuickUnionUF(n * n + 2);
+	   grid = new boolean[n][n];
    }
 
    public void open(int row, int col) {
     // TODO: open site (row, col) if it is not open already
+	   if(!grid[row-1][col]) {
+	   grid[row-1][col] = true;
+	   percolation.union(row, col);;
+	   openSites++;
+	   }
    }
    public boolean isOpen(int row, int col) {
      // TODO: is site (row, col) open?
-     return false;
+     return grid[row-1][col];
    }
    public boolean isFull(int row, int col) {
      // TODO: is site (row, col) full?
-     return false;
+     return !grid[row-1][col];
    }
    public int numberOfOpenSites() {
      // TODO: number of open sites
-     return 0;
+     return openSites;
    }
    
    public boolean percolates() {
