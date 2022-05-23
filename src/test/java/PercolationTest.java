@@ -123,4 +123,10 @@ public class PercolationTest {
     assertFalse("Bottom left site is not connected to the top so should not be full",
                   input10.isFull(10, 1));
   }
+  @Test
+  public void testMakingBoard() {
+	  Percolation p = new Percolation(5);
+	  p.open(1, 1);
+	  assertFalse(p.percolates());
+  }
 }
